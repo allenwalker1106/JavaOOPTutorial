@@ -9,24 +9,28 @@ public abstract class Student {
     private Date o_birthDate;
     private int i_admissionYear;
     private double d_admissionGrade;
+    private String str_departmentID;
+
     private ArrayList<Result> c_results;
 
-    public Student(int i_studentID, String str_name, Date o_birthDate, int i_admissionYear, double d_admissionGrade, ArrayList<Result> c_results) {
+    public Student(int i_studentID, String str_name, Date o_birthDate, int i_admissionYear, double d_admissionGrade, String str_departmentID) {
         this.i_studentID = i_studentID;
         this.str_name = str_name;
         this.o_birthDate = o_birthDate;
         this.i_admissionYear = i_admissionYear;
         this.d_admissionGrade = d_admissionGrade;
-        this.c_results = c_results;
+        this.str_departmentID = str_departmentID;
+        this.c_results = new ArrayList<>();
     }
 
-    public Student(int i_studentID, String str_name, Date o_birthDate, int i_admissionYear, double d_admissionGrade) {
+    public Student(int i_studentID, String str_name, Date o_birthDate, int i_admissionYear, double d_admissionGrade, String str_departmentID, ArrayList<Result> c_results) {
         this.i_studentID = i_studentID;
         this.str_name = str_name;
         this.o_birthDate = o_birthDate;
         this.i_admissionYear = i_admissionYear;
         this.d_admissionGrade = d_admissionGrade;
-        this.c_results = new ArrayList<>();
+        this.str_departmentID = str_departmentID;
+        this.c_results = c_results;
     }
 
     public int getStudentID() {
@@ -77,6 +81,14 @@ public abstract class Student {
         this.c_results = c_results;
     }
 
+    public String getDepartmentID() {
+        return str_departmentID;
+    }
+
+    public void setDepartmentID(String str_departmentID) {
+        this.str_departmentID = str_departmentID;
+    }
+
     @Override
     public String toString() {
         return "Student{" + '\n' +
@@ -85,6 +97,7 @@ public abstract class Student {
                 '\t' + "o_birthDate=" + o_birthDate + '\n' +
                 '\t' + "i_admissionYear=" + i_admissionYear + '\n' +
                 '\t' + "d_admissionGrade=" + d_admissionGrade + '\n' +
+                '\t' + "str_departmentID='" + str_departmentID + "\'," + '\n' +
                 '\t' + "c_results=" + c_results + '\n' +
                 "}\n";
     }

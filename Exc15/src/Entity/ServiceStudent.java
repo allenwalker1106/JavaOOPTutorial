@@ -6,13 +6,13 @@ import java.util.Date;
 public class ServiceStudent extends Student{
     private String str_trainingSite;
 
-    public ServiceStudent(int i_studentID, String str_name, Date o_birthDate, int i_admissionYear, double d_admissionGrade, ArrayList<Result> c_results, String str_trainingSite) {
-        super(i_studentID, str_name, o_birthDate, i_admissionYear, d_admissionGrade, c_results);
+    public ServiceStudent(int i_studentID, String str_name, Date o_birthDate, int i_admissionYear, double d_admissionGrade, String str_departmentID, String str_trainingSite) {
+        super(i_studentID, str_name, o_birthDate, i_admissionYear, d_admissionGrade, str_departmentID);
         this.str_trainingSite = str_trainingSite;
     }
 
-    public ServiceStudent(int i_studentID, String str_name, Date o_birthDate, int i_admissionYear, double d_admissionGrade, String str_trainingSite) {
-        super(i_studentID, str_name, o_birthDate, i_admissionYear, d_admissionGrade);
+    public ServiceStudent(int i_studentID, String str_name, Date o_birthDate, int i_admissionYear, double d_admissionGrade, String str_departmentID, ArrayList<Result> c_results, String str_trainingSite) {
+        super(i_studentID, str_name, o_birthDate, i_admissionYear, d_admissionGrade, str_departmentID, c_results);
         this.str_trainingSite = str_trainingSite;
     }
 
