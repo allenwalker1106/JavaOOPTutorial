@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class Student {
-    private int i_studentID;
-    private String str_name;
-    private Date o_birthDate;
-    private int i_admissionYear;
-    private double d_admissionGrade;
-    private String str_departmentID;
-
-    private ArrayList<Result> c_results;
+    protected int i_studentID;
+    protected String str_name;
+    protected Date o_birthDate;
+    protected int i_admissionYear;
+    protected double d_admissionGrade;
+    protected String str_departmentID;
+    protected ArrayList<Result> c_results;
 
     public Student(int i_studentID, String str_name, Date o_birthDate, int i_admissionYear, double d_admissionGrade, String str_departmentID) {
         this.i_studentID = i_studentID;
@@ -91,14 +90,14 @@ public abstract class Student {
 
     @Override
     public String toString() {
-        return "Student{" + '\n' +
-                '\t' + "i_studentID=" + i_studentID + '\n' +
-                '\t' + "str_name='" + str_name + "\'," + '\n' +
-                '\t' + "o_birthDate=" + o_birthDate + '\n' +
-                '\t' + "i_admissionYear=" + i_admissionYear + '\n' +
-                '\t' + "d_admissionGrade=" + d_admissionGrade + '\n' +
-                '\t' + "str_departmentID='" + str_departmentID + "\'," + '\n' +
-                '\t' + "c_results=" + c_results + '\n' +
-                "}\n";
+        return "Student{" +
+                "i_studentID=" + i_studentID +
+                ", str_name='" + str_name + '\'' +
+                ", o_birthDate=" + o_birthDate +
+                ", i_admissionYear=" + i_admissionYear +
+                ", d_admissionGrade=" + d_admissionGrade +
+                ", str_departmentID='" + str_departmentID + '\'' +
+                ", c_results=" + c_results +
+                '}';
     }
 }
