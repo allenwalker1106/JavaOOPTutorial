@@ -1,0 +1,9 @@
+package fullImplementBackup;
+
+import com.studentManager.StudentManagerEclipse.Entity.Student;
+import org.springframework.stereotype.Repository;
+
+
+public interface StudentRepository extends CrudRepository<Student,Long> {
+
+}

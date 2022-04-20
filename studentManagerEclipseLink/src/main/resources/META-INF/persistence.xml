@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+<persistence-unit name="student-manager-persistence" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.studentManager.StudentManagerEclipse.Entity.Student</class>
+    <class>com.studentManager.StudentManagerEclipse.Entity.RegularStudent</class>
+    <class>com.studentManager.StudentManagerEclipse.Entity.ServiceStudent</class>
+    <class>com.studentManager.StudentManagerEclipse.Entity.TrainingSite</class>
+    <class>com.studentManager.StudentManagerEclipse.Entity.Department</class>
+    <class>com.studentManager.StudentManagerEclipse.Entity.Semester</class>
+    <class>com.studentManager.StudentManagerEclipse.Entity.Result</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+    <properties>
+        <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/spring_eclipselink"/>
+        <property name="javax.persistence.jdbc.user" value="test"/>
+        <property name="javax.persistence.jdbc.password" value="thinhHANOI123"/>
+        <property name="eclipselink.logging.level" value="SEVERE"/>
+        <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+        <property name="eclipselink.logging.level.sql" value="FINE"/>
+        <property name="eclipselink.logging.parameters" value="true"/>
+    </properties>
+</persistence-unit>
+
+</persistence>

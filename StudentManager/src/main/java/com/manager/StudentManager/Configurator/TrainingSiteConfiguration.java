@@ -1,0 +1,28 @@
+package com.manager.StudentManager.Configurator;
+
+import com.manager.StudentManager.Entity.TrainingSite;
+import com.manager.StudentManager.Repository.StudentRepository;
+import com.manager.StudentManager.Repository.TrainingSiteRepository;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
+
+@Configuration
+public class TrainingSiteConfiguration {
+    @Bean("trainingSiteInitializer")
+    CommandLineRunner commandLineRunner(
+            TrainingSiteRepository trainingSiteRepository){
+        return args->{
+            trainingSiteRepository.saveAll(
+                    List.of(
+                            new TrainingSite("HN","Ha Noi"),
+                            new TrainingSite("DN","Da Nang"),
+                            new TrainingSite("HCM","Ho Chi Minh")
+                    )
+            );
+        };
+    }
+
+}

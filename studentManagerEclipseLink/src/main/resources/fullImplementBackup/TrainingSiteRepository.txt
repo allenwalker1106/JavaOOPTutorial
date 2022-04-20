@@ -1,0 +1,7 @@
+package fullImplementBackup;
+
+import com.studentManager.StudentManagerEclipse.Entity.Department;
+import com.studentManager.StudentManagerEclipse.Entity.TrainingSite;
+
+public interface TrainingSiteRepository extends CrudRepository<TrainingSite,String> {
+}

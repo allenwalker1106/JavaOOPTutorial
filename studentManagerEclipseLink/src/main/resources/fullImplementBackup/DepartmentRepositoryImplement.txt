@@ -1,0 +1,80 @@
+package fullImplementBackup;
+
+import com.studentManager.StudentManagerEclipse.Entity.Department;
+import com.studentManager.StudentManagerEclipse.Repository.DepartmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+
+public class DepartmentRepositoryImplement implements DepartmentRepository {
+
+
+    @Autowired
+    EntityManager o_entityManager;
+
+    @Override
+    public Optional<Department> getById(String id) {
+        Query o_query = o_entityManager.createNamedQuery("Department.getById");
+        o_query.setParameter("id",id);
+
+        List<Department> c_departments = o_query.getResultList();
+        if(c_departments.size()==0){
+           return Optional.empty();
+        }
+        return Optional.of((Department) c_departments.get(0));
+    }
+
+    @Override
+    public Optional<Department> getOne(String id) {
+        return getById(id);
+    }
+
+    @Override
+    public List<Department> findAll() {
+        Query o_query = o_entityManager.createNamedQuery("Department.findAll");
+        List<Department> c_departments = o_query.getResultList();
+        return c_departments;
+    }
+
+    @Override
+    public List<Department> findAllById(List<String> ids) {
+        Query o_query = o_entityManager.createNamedQuery("Department.findAllById");
+        o_query.setParameter("ids",ids);
+        List<Department> c_departments = o_query.getResultList();
+        return c_departments;
+    }
+
+    @Override
+    public Optional<Department> save(Department entity){
+        try {
+            o_entityManager.getTransaction().begin();
+            o_entityManager.persist(entity);
+            o_entityManager.getTransaction().commit();
+            return getById(entity.getId());
+        }catch(RollbackException e){
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public List<Department> saveAll(List<Department> entities) {
+        List<String> c_ids= new ArrayList<String>();
+
+        try {
+            o_entityManager.getTransaction().begin();
+            for(Department entity : entities) {
+                c_ids.add(entity.getId());
+                o_entityManager.persist(entity);
+            }
+            o_entityManager.getTransaction().commit();
+            return findAllById(c_ids);
+        }catch(Exception e){
+            return List.of();
+        }
+    }
+}

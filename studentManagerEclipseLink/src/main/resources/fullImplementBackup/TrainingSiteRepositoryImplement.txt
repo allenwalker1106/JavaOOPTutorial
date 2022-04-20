@@ -1,0 +1,81 @@
+package fullImplementBackup;
+
+import com.studentManager.StudentManagerEclipse.Entity.TrainingSite;
+import com.studentManager.StudentManagerEclipse.Repository.TrainingSiteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.RollbackException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class TrainingSiteRepositoryImplement implements TrainingSiteRepository {
+
+
+    @Autowired
+    EntityManager o_entityManager;
+
+    @Override
+    public Optional<TrainingSite> getById(String id) {
+        Query o_query = o_entityManager.createNamedQuery("TrainingSite.getById");
+        o_query.setParameter("id",id);
+
+        List<TrainingSite> c_departments = o_query.getResultList();
+        if(c_departments.size()==0){
+            return Optional.empty();
+        }
+        return Optional.of((TrainingSite) c_departments.get(0));
+    }
+
+    @Override
+    public Optional<TrainingSite> getOne(String s) {
+        return getById(s);
+    }
+
+    @Override
+    public List<TrainingSite> findAll() {
+        Query o_query = o_entityManager.createNamedQuery("TrainingSite.findAll");
+        List<TrainingSite> c_departments = o_query.getResultList();
+        return c_departments;
+    }
+
+    @Override
+    public List<TrainingSite> findAllById(List<String> ids) {
+        Query o_query = o_entityManager.createNamedQuery("TrainingSite.findAllById");
+        o_query.setParameter("ids",ids);
+        List<TrainingSite> c_departments = o_query.getResultList();
+        return c_departments;
+    }
+
+    @Override
+    public Optional<TrainingSite> save(TrainingSite entity){
+        try {
+            o_entityManager.getTransaction().begin();
+            o_entityManager.persist(entity);
+            o_entityManager.getTransaction().commit();
+            return getById(entity.getId());
+        }catch(RollbackException e){
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public List<TrainingSite> saveAll(List<TrainingSite> entities) {
+        List<String> c_ids= new ArrayList<String>();
+
+        try {
+            o_entityManager.getTransaction().begin();
+            for(TrainingSite entity : entities) {
+                c_ids.add(entity.getId());
+                o_entityManager.persist(entity);
+            }
+            o_entityManager.getTransaction().commit();
+            return findAllById(c_ids);
+        }catch(Exception e){
+            return List.of();
+        }
+    }
+}

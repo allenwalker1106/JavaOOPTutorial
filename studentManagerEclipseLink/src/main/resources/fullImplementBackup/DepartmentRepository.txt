@@ -1,0 +1,6 @@
+package fullImplementBackup;
+
+import com.studentManager.StudentManagerEclipse.Entity.Department;
+
+public interface DepartmentRepository extends CrudRepository<Department,String>{
+}
