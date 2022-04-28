@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <link rel="stylesheet" th:href="@{/styles/dashboard.css}">
+</head>
+<body>
+<div class="app">
+    <header class="app-header">
+        <div class="app-header-logo">
+            <div class="logo">
+				<span class="logo-icon">
+					<img src="https://assets.codepen.io/285131/almeria-logo.svg" />
+				</span>
+                <h1 class="logo-title">
+                    <span>Employee </span>
+                    <span>Manager</span>
+                </h1>
+            </div>
+        </div>
+        <div class="app-header-actions">
+            <button class="user-profile">
+                <span th:text="${account}"></span>
+            </button>
+            <div class="app-header-actions-buttons">
+                <a class="ph-bell" th:href="@{/logout}" >
+                    <button class="icon-button large" >
+                    </button>
+                </a>
+            </div>
+            <div class="logout-name">
+                <a th:href="@{/logout}"> Logout</a>
+            </div>
+        </div>
+        <div class="app-header-mobile">
+            <button class="icon-button large">
+                <i class="ph-list"></i>
+            </button>
+        </div>
+
+    </header>
+    <div class="app-body">
+        <div class="dropdown-box">
+
+            <h1>Dashboard</h1>
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Employee Manager</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a th:href="@{/admin_dashboard/employee/list}">Employee List</a>
+                    </div>
+
+                    <div class="content-child">
+                        <a th:href="@{/admin_dashboard/employee/add}">Add Employee</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Employee Statistic</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a href="#">Employee Statistic</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-body-main-content">
+            <section class="service-section">
+<!--                <h2>Employee List</h2>-->
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/scripts/dashboard.js}"></script>
+</body>
+</html>

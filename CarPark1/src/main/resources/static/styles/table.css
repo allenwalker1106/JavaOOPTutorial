@@ -1,0 +1,16 @@
+tr{
+text-align:center;
+border-bottom: 1pt solid whitesmoke;
+}
+td{
+
+text-align:center;
+}
+
+
+
+table{
+padding-top:20px;
+  width:100%;
+  border-collapse: collapse;
+}

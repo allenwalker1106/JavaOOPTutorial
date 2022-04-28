@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <link rel="stylesheet" th:href="@{/styles/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/styles/add.css}">
+</head>
+<body>
+<div class="app">
+    <header class="app-header">
+        <div class="app-header-logo">
+            <div class="logo">
+				<span class="logo-icon">
+					<img src="https://assets.codepen.io/285131/almeria-logo.svg" />
+				</span>
+                <h1 class="logo-title">
+                    <span>Employee </span>
+                    <span>Manager</span>
+                </h1>
+            </div>
+        </div>
+        <div class="app-header-actions">
+            <button class="user-profile">
+                <span th:text="${account}"></span>
+            </button>
+            <div class="app-header-actions-buttons">
+                <a class="ph-bell" th:href="@{/logout}" >
+                    <button class="icon-button large" >
+                    </button>
+                </a>
+            </div>
+            <div class="logout-name">
+                <a th:href="@{/logout}"> Logout</a>
+            </div>
+        </div>
+        <div class="app-header-mobile">
+            <button class="icon-button large">
+                <i class="ph-list"></i>
+            </button>
+        </div>
+
+    </header>
+    <div class="app-body">
+        <div class="dropdown-box">
+
+            <h1>Dashboard</h1>
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Employee Manager</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a th:href="@{/admin_dashboard/employee/list}">Employee List</a>
+                    </div>
+
+                    <div class="content-child">
+                        <a th:href="@{/admin_dashboard/employee/add}">Add Employee</a>
+                    </div>
+                </div>
+            </div>
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Employee Statistic</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a href="#">Employee Statistic</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="app-body-main-content">
+            <section class="service-section">
+                <h2>Add Employee</h2>
+                <div class="register-container">
+                    <form method="POST" th:action="@{/admin_dashboard/employee/add}" th:object="${employee}">
+                        <h2>Employee Information</h2>
+                        <div>
+                            <label>
+                                Name
+                                <span class="valid_check" th:style="'visibility:' + (${isNameValid==null||(isNameValid!=null&&isNameValid)}?'hidden':'visible') + ';'" >
+                                    * Invalid Name Format
+                                </span>
+                            </label>
+                            <input type="text" name="name" th:field="*{name}"  placeholder="Enter your name here" value=""/>
+                        </div>
+                        <div>
+                            <label>
+                                Department
+
+                                <span class="valid_check" th:style="'visibility:' + (${isDepartmentValid==null||(isDepartmentValid!=null&&isDepartmentValid)}?'hidden':'visible') + ';'" >
+                                    * This Field Is Required
+                                </span>
+                            </label>
+                            <input type="text" name="department" th:field="*{department}"  placeholder="Enter your department here" value=""/>
+                        </div>
+                        <div>
+                            <label>
+                                Address
+
+                                <span class="valid_check" th:style="'visibility:' + (${isAddressValid==null||(isAddressValid!=null&&isAddressValid)}?'hidden':'visible') + ';'" >
+                                    * This Field Is Required
+                                </span>
+                            </label>
+                            <input type="text" name="address" th:field="*{address}"  placeholder="Enter your Address here" value=""/>
+                        </div>
+                        <div>
+                            <label>
+                                Email
+                                <span class="valid_check" th:style="'visibility:' + (${isEmailValid==null||(isEmailValid!=null&&isEmailValid)}?'hidden':'visible') + ';'" >
+                                    * Invalid Email Or Duplicate Entry
+                                </span>
+                            </label>
+                            <input type="text" name="email" th:field="*{email}"  placeholder="Enter your email here" value=""/>
+                        </div>
+                        <div>
+                            <label>
+                                Phone Number
+                                <span class="valid_check" th:style="'visibility:' + (${isPhoneNumberValid==null||(isPhoneNumberValid!=null&&isPhoneNumberValid)}?'hidden':'visible') + ';'" >
+                                    * Invalid Phone Number Or Duplicate Entry
+                                </span>
+                            </label>
+                            <input type="text" name="phoneNumber" th:field="*{phoneNumber}"  placeholder="Enter your phone number here" value=""/>
+                        </div>
+                        <div>
+                            <label>
+                                Gender
+
+                                <span class="valid_check" th:style="'visibility:' + (${isGenderValid==null||(isGenderValid!=null&&isGenderValid)}?'hidden':'visible') + ';'" >
+                                    * This Field Is Required
+                                </span>
+                            </label>
+                            <input type="radio" name="gender" th:field="*{gender}" value="Male"><span>Male</span></input>
+                            <input type="radio" name="gender" th:field="*{gender}" value="Female"><span>Female</span></input>
+
+                        </div>
+                        <div>
+                            <label>
+                                Account
+
+                                <span class="valid_check" th:style="'visibility:' + (${isAccountValid==null||(isAccountValid!=null&&isAccountValid)}?'hidden':'visible') + ';'" >
+                                    * Invalid Account Or Duplicate Entry
+                                </span>
+                            </label>
+                            <input type="text" name="account" th:field="*{account}" placeholder="Enter your username here" value=""/>
+                        </div>
+                        <div>
+                            <label>
+                                Password
+
+                                <span class="valid_check" th:style="'visibility:' + (${isPasswordValid==null||(isPasswordValid!=null&&isPasswordValid)}?'hidden':'visible') + ';'" >
+                                    * Invalid Password: Must Longer Than 6 And Contain Number,Lowercase Character,Uppercase Character,Number,Special Character
+                                </span>
+                            </label>
+                            <input type="password" name="password" th:field="*{password}"  placeholder="Enter your password here" value=""/>
+                        </div>
+
+                        <div>
+                            <label>
+                                Confirm Password
+
+                                <span class="valid_check" th:style="'visibility:' + (${isConfirmPasswordValid==null||(isConfirmPasswordValid!=null&&isConfirmPasswordValid)}?'hidden':'visible') + ';'" >
+                                    * Password Not Match
+                                </span>
+                            </label>
+                            <input type="password" name="confirmPassword" th:field="*{confirmPassword}"  placeholder="Enter your password here" value=""/>
+                        </div>
+                        <div>
+                            <label>
+                                Date Of Birth
+
+                                <span class="valid_check" th:style="'visibility:' + (${isDateValid==null||(isDateValid!=null&&isDateValid)}?'hidden':'visible') + ';'" >
+                                    * This Field Is Required
+                                </span>
+                            </label>
+                            <input type="date" name="date" th:field="*{date}"   value=""/>
+                        </div>
+                        <input type="submit" value="Add Employee">
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/scripts/dashboard.js}"></script>
+</body>
+</html>

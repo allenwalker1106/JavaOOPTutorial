@@ -1,0 +1,61 @@
+.register-container{
+    background: transparent;
+    box-sizing: border-box;
+    color: #fff;
+    padding: 40px 20px;
+}
+
+.register-container h1{
+    text-align: center;
+    font-size: 20px;
+}
+
+.register-container label{
+    display: block;
+}
+
+.register-container div{
+    margin-bottom: 20px;
+}
+
+.register-container input[type="text"], input[type="password"],input[type="number"],input[type="date"],input[type="time"], .select_box{
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ffff;
+    background: transparent;
+    color: #ffff;
+    height: 40px;
+}
+
+.register-container input[type="submit"]{
+    width: 40%;
+    border: none;
+    outline: none;
+    height: 40px;
+    background: transparent;
+    border:1px solid;
+    border-color:grey;
+    color: #ffff;
+    border-radius: 5px;
+
+}
+.register-container input[type="submit"]:hover{
+    cursor: pointer;
+    box-shadow: 1px 1px 10px #696969;
+}
+.login-fail{
+    background-color:rgba(255,0,0,0.3);
+    border-top: 5px;
+    color:white;
+}
+
+.valid_check{
+    color:red;
+    visibility: hidden;
+}
+
+.emp_data{
+    width:100%;
+    border-bottom: 1px solid #ffff;
+}
