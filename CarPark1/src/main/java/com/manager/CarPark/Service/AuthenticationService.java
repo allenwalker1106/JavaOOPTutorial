@@ -42,11 +42,15 @@ public class AuthenticationService {
             }else{
                 Employee o_employee = c_employee.get(0);
                 Permission o_permission = o_employee.getPermission();
+                if(!o_credential.getSessionId().equals(RequestContextHolder.currentRequestAttributes().getSessionId()))
+                    return false;
                 if(!o_credential.getRole().equalsIgnoreCase(o_permission.getRole()))
                     return false;
                 if(!o_credential.getSessionId().equals(o_permission.getSessionId()))
                     return false;
-                if(!o_credential.getAccessKey().equals(o_permission.getAccessKey()))
+                if(!o_securityService.validateHash(o_securityService.applyMd5(o_credential.getSessionId()+o_credential.getAccount()),o_permission.getAccessKey()))
+                    return false;
+                if(!o_securityService.validateHash(o_securityService.applyMd5(o_credential.getSessionId()+o_credential.getAccount()),o_credential.getAccessKey()))
                     return false;
             }
         }
@@ -84,11 +88,12 @@ public class AuthenticationService {
             }else {
                 Employee o_employee = c_employee.get(0);
                 Permission o_permission = o_employee.getPermission();
-                String str_password = o_securityService.getMd5(o_credential.getPassword());
-                if(!o_employee.getPassword().equalsIgnoreCase(str_password))
+                String str_password = o_securityService.applyMd5(o_credential.getPassword());
+                String db_password =o_employee.getPassword();
+                if(!o_securityService.validateHash(str_password,db_password))
                     return o_credential;
                 else{
-                    String str_accessKey = o_securityService.getMd5(o_credential.getSessionId()+o_employee.getAccount());
+                    String str_accessKey = o_securityService.encrypt(o_credential.getSessionId()+o_employee.getAccount());
                     o_permission.setSessionId(o_credential.getSessionId());
                     o_permission.setAccessKey(str_accessKey);
                     o_permissionRepository.save(o_permission);
@@ -157,7 +162,7 @@ public class AuthenticationService {
                 o_credential.setSessionId(cookie.getValue());
             else if(cookie.getName().equalsIgnoreCase("ACCOUNT"))
                 o_credential.setAccount(cookie.getValue());
-            else if(cookie.getName().equalsIgnoreCase("ACCESS-TOKEN"))
+            else if(cookie.getName().equalsIgnoreCase("ACCESS_TOKEN"))
                 o_credential.setAccessKey(cookie.getValue());
         }
         return o_credential;

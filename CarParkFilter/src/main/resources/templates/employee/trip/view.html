@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trip Dashboard</title>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <link rel="stylesheet" th:href="@{/styles/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/styles/view.css}">
+</head>
+<body>
+<div class="app">
+    <header class="app-header">
+        <div class="app-header-logo">
+            <div class="logo">
+				<span class="logo-icon">
+					<img src="https://assets.codepen.io/285131/almeria-logo.svg" />
+				</span>
+                <h1 class="logo-title">
+                    <span>Employee </span>
+                    <span>Manager</span>
+                </h1>
+            </div>
+        </div>
+        <div class="app-header-actions">
+            <button class="user-profile">
+                <span th:text="${account}"></span>
+            </button>
+            <div class="app-header-actions-buttons">
+                <a class="ph-bell" th:href="@{/logout}" >
+                    <button class="icon-button large" >
+                    </button>
+                </a>
+            </div>
+            <div class="logout-name">
+                <a th:href="@{/logout}"> Logout</a>
+            </div>
+        </div>
+        <div class="app-header-mobile">
+            <button class="icon-button large">
+                <i class="ph-list"></i>
+            </button>
+        </div>
+
+    </header>
+    <div class="app-body">
+        <div class="dropdown-box">
+
+            <h1>Car Park Manager</h1>
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Car Manager</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/car/list}">Car List</a>
+                    </div>
+
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/car/add}">Add Car</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Booking Office Manager</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/bookingOffice/list}">Booking Office List</a>
+                    </div>
+
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/bookingOffice/add}">Add Booking Office</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Parking Lot Manager</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/parkingLot/list}">Parking Lot List</a>
+                    </div>
+
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/parkingLot/add}">Add Parking Lot</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Trip Manager</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/trip/list}">Trip List</a>
+                    </div>
+
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/trip/add}">Add Trip</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Ticket Manager</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/ticket/list}">Ticket List</a>
+                    </div>
+
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/ticket/add}">Add Ticket</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+        <div class="app-body-main-content">
+            <section class="service-section">
+                <h2>Trip Information</h2>
+                <div class="information-container">
+                    <div th:object="${trip}">
+                        <div>
+                            <label>
+                                Id
+                            </label>
+                            <p class="emp_data" name="id" th:text="${trip.getId()}" value=""></p>
+                        </div>
+                        <div>
+                            <label>
+                                Maximum Online Ticket Number
+                            </label>
+
+                            <p class="emp_data" th:text="${trip.getMaximumOnlineTicketNumber()}"></p>
+                        </div>
+
+                        <div>
+                            <label>
+                                Booked Ticket Number
+                            </label>
+
+                            <p class="emp_data" th:text="${trip.getBookedTicketNumber()}"></p>
+                        </div>
+                        <div>
+                            <label>
+                                Car Type
+                            </label>
+                            <p class="emp_data" th:text="${trip.getCarType()}"></p>
+                        </div>
+                        <div>
+                            <label>
+                                Destination
+                            </label>
+
+                            <p class="emp_data" th:text="${trip.getDestination()}"></p>
+                        </div>
+                        <div>
+                            <label>
+                                Driver
+                            </label>
+
+                            <p class="emp_data" th:text="${trip.getDriver()}"></p>
+                        </div>
+                        <div>
+                            <label>
+                                Departure Date
+                            </label>
+                            <p class="emp_data" th:text="${trip.getDepartureDate()}"></p>
+                        </div>
+
+                        <div>
+                            <label>
+                                Departure Time
+                            </label>
+                            <p class="emp_data" th:text="${trip.getDepartureTime()}"></p>
+                        </div>
+                        <div class="button_container">
+                            <form th:method="POST" th:action="@{/employee_dashboard/trip/list/view/delete(id=${trip.getId()})}">
+                                <button type="submit" >
+                                    <a>Delete Trip</a>
+                                </button>
+                            </form>
+                            <button >
+                                <a th:href="@{/employee_dashboard/trip/list/view/update(id=${trip.getId()})}">Update Trip</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/scripts/dashboard.js}"></script>
+</body>
+</html>

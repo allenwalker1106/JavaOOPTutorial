@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Dashboard</title>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <link rel="stylesheet" th:href="@{/styles/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/styles/add.css}">
+</head>
+<body>
+<div class="app">
+    <header class="app-header">
+        <div class="app-header-logo">
+            <div class="logo">
+				<span class="logo-icon">
+					<img src="https://assets.codepen.io/285131/almeria-logo.svg" />
+				</span>
+                <h1 class="logo-title">
+                    <span>Booking Office</span>
+                    <span>Manager</span>
+                </h1>
+            </div>
+        </div>
+        <div class="app-header-actions">
+            <button class="user-profile">
+                <span th:text="${account}"></span>
+            </button>
+            <div class="app-header-actions-buttons">
+                <a class="ph-bell" th:href="@{/logout}" >
+                    <button class="icon-button large" >
+                    </button>
+                </a>
+            </div>
+            <div class="logout-name">
+                <a th:href="@{/logout}"> Logout</a>
+            </div>
+        </div>
+        <div class="app-header-mobile">
+            <button class="icon-button large">
+                <i class="ph-list"></i>
+            </button>
+        </div>
+
+    </header>
+    <div class="app-body">
+        <div class="dropdown-box">
+
+            <h1>Car Park Manager</h1>
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Car Manager</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/car/list}">Car List</a>
+                    </div>
+
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/car/add}">Add Car</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Booking Office Manager</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/bookingOffice/list}">Booking Office List</a>
+                    </div>
+
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/bookingOffice/add}">Add Booking Office</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Parking Lot Manager</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/parkingLot/list}">Parking Lot List</a>
+                    </div>
+
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/parkingLot/add}">Add Parking Lot</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Trip Manager</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/trip/list}">Trip List</a>
+                    </div>
+
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/trip/add}">Add Trip</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="drowBox">
+                <div class="opener">
+                    <h1>Ticket Manager</h1>
+                </div>
+                <div class="content">
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/ticket/list}">Ticket List</a>
+                    </div>
+
+                    <div class="content-child">
+                        <a th:href="@{/employee_dashboard/ticket/add}">Add Ticket</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="app-body-main-content">
+            <section class="service-section">
+                <h2>Add Booking Office</h2>
+                <div class="register-container">
+                    <form method="POST" th:action="@{/employee_dashboard/bookingOffice/list/view/update}" th:object="${bookingOffice}">
+                        <h2>Booking Office Information</h2>
+                        <div>
+                            <label>
+                                *Id
+                            </label>
+                            <input type="text" name="id" th:field="*{id}" readonly></input>
+                        </div>
+                        <div>
+                            <label>
+                                Booking Office Name
+                                <span class="valid_check" th:style="'visibility:' + (${isNameValid==null||(isNameValid!=null&&isNameValid)}?'hidden':'visible') + ';'" >
+                                    * This Field Is Required
+                                </span>
+                            </label>
+                            <input type="text" name="name" th:field="*{name}"  placeholder="Enter Your Booking Office Name Here" value=""/>
+                        </div>
+                        <div>
+                            <label>
+                                *Trip
+                            </label>
+                            <p class="emp_data" th:text="${bookingOffice.getTrip().getDestination()}"></p>
+                        </div>
+
+                        <div>
+                            <label>
+                                Phone Number
+
+                                <span class="valid_check" th:style="'visibility:' + (${isPhoneNumberValid==null||(isPhoneNumberValid!=null&&isPhoneNumberValid)}?'hidden':'visible') + ';'" >
+                                    * Invalid Phone Number Or Duplicate Entry
+                                </span>
+                            </label>
+                            <input type="text" name="phoneNumber" th:field="*{phoneNumber}"  placeholder="Enter your Phone Number here" value=""/>
+                        </div>
+                        <div>
+                            <label>
+                                Place
+                                <span class="valid_check" th:style="'visibility:' + (${isPlaceValid==null||(isPlaceValid!=null&&isPlaceValid)}?'hidden':'visible') + ';'" >
+                                    * Invalid Place Or Duplicate Entry
+                                </span>
+                            </label>
+                            <input type="text" name="place" th:field="*{place}"  placeholder="Enter your Office Place here" value=""/>
+                        </div>
+                        <div>
+                            <label>
+                                Price
+
+                                <span class="valid_check" th:style="'visibility:' + (${isPriceValid==null||(isPriceValid!=null&&isPriceValid)}?'hidden':'visible') + ';'" >
+                                    * Invalid Number Format
+                                </span>
+                            </label>
+                            <input type="number" name="price" th:field="*{price}"   placeholder="Enter your Price  here"  value=""/>
+                        </div>
+
+                        <div>
+                            <label>
+                                *Contract Start Date
+                            </label>
+                            <input type="date" name="endDate" th:field="*{startDate}"   readonly/>
+                        </div>
+
+                        <div>
+                            <label>
+                                *Contract End Date
+                            </label>
+                            <input type="date" name="endDate" th:field="*{endDate}"   readonly/>
+                        </div>
+                        <input type="submit" value="Update Booking Office">
+                        <!--        <a href="#">Forgot Password?</a>-->
+                        <!--        <a href="#">Forgot Username?</a>-->
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/scripts/dashboard.js}"></script>
+</body>
+</html>

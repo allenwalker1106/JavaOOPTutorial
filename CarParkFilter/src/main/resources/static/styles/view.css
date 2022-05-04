@@ -1,0 +1,32 @@
+.emp_data{
+    width:100%;
+    border-bottom: 1px solid #ffff;
+}
+
+
+.button_container button{
+    width: 200px;
+    border: none;
+    outline: none;
+    height: 40px;
+    background: transparent;
+    border:1px solid;
+    border-color:grey;
+    color: #ffff;
+    border-radius: 5px;
+    text-align: center;
+    justify-content: center;
+
+}
+.button_container button:hover{
+    cursor: pointer;
+    box-shadow: 1px 1px 10px #696969;
+}
+
+a{
+text-decoration: none;
+}
+
+.button_container{
+    display:flex;
+}

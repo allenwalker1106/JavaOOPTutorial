@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Park</title>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <link rel="stylesheet" th:href="@{/styles/login.css}">
+</head>
+<body>
+<div class="login-container">
+    <form method="POST" th:action="@{/login}" th:object="${credential}">
+        <h1>LOGIN</h1>
+        <div class="login-fail"  th:style="'visibility:' + (${isValid==null||(isValid!=null&&isValid)}?'hidden':'visible') + ';'"  >
+            <p >Invalid Credential</p>
+        </div>
+        <div>
+            <label>Username</label>
+            <input type="text" name="account" th:field="*{account}" placeholder="Enter your username here" value=""/>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" name="password" th:field="*{password}"  placeholder="Enter your password here" value=""/>
+        </div>
+        <input type="submit" >
+<!--        <a href="#">Forgot Password?</a>-->
+<!--        <a href="#">Forgot Username?</a>-->
+    </form>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -14,10 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -38,9 +35,6 @@ public class AddController {
 
     @Autowired
     private BookingOfficeValidator o_validator;
-
-    @Autowired
-    private ModelMapper o_modelMapper;
 
     @Autowired
     private TripService o_tripService;
@@ -77,7 +71,7 @@ public class AddController {
             @CookieValue(value="JSESSIONID", required = false) String JSESSIONID,
             @CookieValue(value="ACCESS_TOKEN", required = false) String ACCESS_TOKEN,
             Model model,
-            BookingOfficeDto o_bookingOfficeDto
+            @RequestBody  BookingOfficeDto o_bookingOfficeDto
     ){
         CredentialDto o_credential = new CredentialDto(ACCOUNT,ROLE,JSESSIONID,ACCESS_TOKEN);
         boolean b_isAuthenticated = o_authenticationService.isAuthenticated(o_credential);
